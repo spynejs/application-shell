@@ -1,0 +1,12 @@
+*.DS_Store
+.idea
+node_modules
+node_modules/*
+admin
+repo-scripts
+app/*
+!app/.gitkeep
+dist/*
+src/tests/results/*
+!dist/.gitkeep
+src/scss/scripts/*

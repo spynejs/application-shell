@@ -33,6 +33,7 @@ export default [
       ...js.configs.recommended.rules,
       ...prettierPlugin.configs.recommended.rules,
       ...mochaPlugin.configs.recommended.rules,
+      'prettier/prettier': 'off',
     },
   },
 ];

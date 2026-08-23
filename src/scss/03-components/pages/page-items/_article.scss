@@ -1,0 +1,22 @@
+.page-item--article {
+  .article-header {
+    max-inline-size: 680px;
+    margin: 0 auto 1.5rem;
+
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      line-height: 1.2;
+      margin-block-end: 0.5rem;
+    }
+  }
+
+  .article-body {
+    max-inline-size: 680px;
+    margin: 0 auto;
+    line-height: 1.7;
+
+    p {
+      margin-block-end: 1.25rem;
+    }
+  }
+}

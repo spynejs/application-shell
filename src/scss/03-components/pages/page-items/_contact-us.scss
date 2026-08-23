@@ -1,0 +1,39 @@
+// Styles for the contact-form page-item (contact-us.tmpl.html / ContactUsView).
+// Shell-owned so generated data stays content-only.
+.contact-us {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-inline-size: 720px;
+
+  .contact-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin: 0 0 1rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-block-end: 1rem;
+
+    label {
+      font-weight: 600;
+    }
+
+    input,
+    textarea {
+      padding: 0.6rem 0.75rem;
+      border: 1px solid #8884;
+      border-radius: 8px;
+      font: inherit;
+      background: transparent;
+      color: inherit;
+    }
+  }
+
+  .form-actions {
+    margin-block-start: 0.5rem;
+  }
+}

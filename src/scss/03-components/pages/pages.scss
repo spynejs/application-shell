@@ -1,6 +1,12 @@
 @use '../../00-spynejs-design-system/tokens/spacing' as spacing;
 @use 'page-items/page-item';
 @use 'page-items/section-title';
+@use 'page-items/article';
+@use 'page-items/faq';
+@use 'page-items/testimonials';
+@use 'page-items/stats-band';
+@use 'page-items/where-we-are';
+@use 'page-items/contact-us';
 
 #stage-view {
   background: var(--bg-base);

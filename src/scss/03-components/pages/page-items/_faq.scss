@@ -1,0 +1,31 @@
+.page-item--faq {
+  max-inline-size: 720px;
+  margin: 0 auto;
+
+  .faq-title {
+    text-align: center;
+    margin-block-end: 2rem;
+  }
+
+  .faq-list {
+    margin: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .faq-item {
+    padding-block-end: 1.25rem;
+    border-block-end: 1px solid #8882;
+  }
+
+  .faq-q {
+    font-weight: 600;
+    margin-block-end: 0.4rem;
+  }
+
+  .faq-a {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+}

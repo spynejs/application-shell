@@ -1,0 +1,19 @@
+.page-item--stats-band {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem 4rem;
+  padding-block: 2.5rem;
+  text-align: center;
+
+  .stat-value {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .stat-label {
+    color: var(--text-muted);
+    margin-block-start: 0.35rem;
+  }
+}

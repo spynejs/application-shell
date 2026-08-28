@@ -28,6 +28,9 @@ $warn: $color-supporting-4-600;
 @use '../tokens' as *;
 
 $light-theme: (
+  // Environment
+  bg-base: $color-neutral-0,
+
   // Brand
   brand: $color-primary-600,
   brand-contrast: $color-neutral-0,

@@ -28,4 +28,20 @@
     color: var(--text-muted);
     line-height: 1.6;
   }
+
+  // variant: two-column Q&A grid
+  &.faq--two-column {
+    max-inline-size: 1024px;
+
+    .faq-list {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 2.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .faq-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
 }

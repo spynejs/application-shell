@@ -7,6 +7,9 @@
 @use 'page-items/stats-band';
 @use 'page-items/where-we-are';
 @use 'page-items/contact-us';
+@use 'page-items/post-list';
+@use 'page-items/products';
+@use 'page-items/split-feature';
 
 #stage-view {
   background: var(--bg-base);

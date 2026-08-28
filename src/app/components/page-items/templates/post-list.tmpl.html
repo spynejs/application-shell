@@ -1,0 +1,14 @@
+<div class="page-item--post-list">
+  <h2 class="post-list-title">{{title}}</h2>
+  <ol class="post-list">
+    {{#posts}}
+    <li class="post-row">
+      <span class="post-date">{{date}}</span>
+      <div class="post-main">
+        <h3 class="post-title"><a class="post-link" href="{{href}}">{{title}}</a></h3>
+        <p class="post-excerpt">{{excerpt}}</p>
+      </div>
+    </li>
+    {{/posts}}
+  </ol>
+</div>

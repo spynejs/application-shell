@@ -1,0 +1,17 @@
+<div class="page-item--products">
+  <h2 class="products-title">{{title}}</h2>
+  <div class="products-grid">
+    {{#products}}
+    <div class="product-card">
+      <div class="product-media">
+        <img class="product-img" alt="{{name}}" src="{{attrImageSrc}}" />
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">{{name}}</h3>
+        <p class="product-tagline">{{tagline}}</p>
+        <div class="product-price">{{price}}</div>
+      </div>
+    </div>
+    {{/products}}
+  </div>
+</div>

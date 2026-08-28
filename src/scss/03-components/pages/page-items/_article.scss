@@ -19,4 +19,27 @@
       margin-block-end: 1.25rem;
     }
   }
+
+  // variant: magazine-style two-column body
+  &.article--two-column {
+    .article-header,
+    .article-body {
+      max-inline-size: 960px;
+    }
+
+    .article-body {
+      columns: 2;
+      column-gap: 2.5rem;
+
+      p {
+        break-inside: avoid;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .article-body {
+        columns: 1;
+      }
+    }
+  }
 }

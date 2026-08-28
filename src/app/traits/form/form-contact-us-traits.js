@@ -15,10 +15,13 @@ export class FormContactUsTraits extends SpyneTrait {
     const formData = new FormData(form);
 
     const formDataObj = {
-      name: formData.get('name'),
+      name: formData.get('fullName'),
       email: formData.get('email'),
       message: formData.get('message'),
     };
+
+    // held for the success state, which greets the sender by name
+    this.props.submittedData = formDataObj;
 
     if (mode === 'api') {
       this.contactUs$SendFormViaApi(formDataObj, apiUrl);
@@ -50,9 +53,28 @@ export class FormContactUsTraits extends SpyneTrait {
     );
   }
 
-  contactUs$OnSuccess() {}
+  /**
+   * Swaps the form for the success state: a heading that greets the sender
+   * by name, with the confirmation message beneath it. The status container
+   * carries role="status", so assistive technology announces it without
+   * moving focus. Values are written via innerText, never markup.
+   */
+  static contactUs$OnSuccess(e, props = this.props) {
+    const { successMessage, submittedData } = props;
+    const name = submittedData?.name?.trim();
 
-  static contactUs$HelloWorld() {
-    return 'Hello World';
+    const titleEl = this.props.el$('.contact-us__status-title').el;
+    const msgEl = this.props.el$('.contact-us__status-msg').el;
+
+    if (titleEl !== null) {
+      titleEl.innerText = name ? `Thanks, ${name}.` : 'Thanks.';
+    }
+
+    if (msgEl !== null) {
+      msgEl.innerText = successMessage;
+    }
+
+    this.props.el$.addClass('contact-us--submitted');
   }
+
 }

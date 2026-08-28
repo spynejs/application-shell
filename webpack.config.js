@@ -37,7 +37,13 @@ export default (env = { mode: 'development' }) => {
   const imgPath = `${PUBLIC_PATH}${assetsFolder}static/imgs/`;
   const sassStaticDir = isProduction ? `././../static/` : './static/';
 
-  const ctx = { isProduction, isTest, buildType, assetsFolder, imgPath };
+  /**
+   * Inline lint is opt-in: `--env lint` or SPYNE_LINT=1. Off by default so
+   * the dev build reports compile output only. `npm run lint` is unaffected.
+   */
+  const lint = env.lint === true || process.env.SPYNE_LINT === '1';
+
+  const ctx = { isProduction, isTest, buildType, assetsFolder, imgPath, lint };
 
   return {
     mode,
@@ -197,6 +203,7 @@ function getWebpackPlugins({
   buildType,
   assetsFolder,
   imgPath,
+  lint,
 }) {
   const definePlugin = new webpack.DefinePlugin({
     IMG_PATH: JSON.stringify(imgPath),
@@ -219,15 +226,17 @@ function getWebpackPlugins({
       buildCopyPlugin({ assetsFolder, buildType }),
     );
   } else if (!isTest) {
-    // Dev (not test): run the CMS adapter server, and surface lint inline so an
-    // agent gets immediate feedback. failOnError:false keeps lint non-blocking —
-    // issues show as warnings in the build output, they don't break `npm start`.
-    plugins.push(
-      new CmsAdapterWebpack(),
+    // Dev (not test): run the CMS adapter server.
+    plugins.push(new CmsAdapterWebpack());
+
+    // Inline lint only when requested (--env lint / SPYNE_LINT=1), the path
+    // used by CI and tooling. failOnError:false keeps it non-blocking either
+    // way — issues surface in the build output, they never break `npm start`.
+    if (lint) {
       // configType 'flat' is required for ESLint 9 — without it the plugin
       // looks for a legacy .eslintrc and ignores eslint.config.js.
-      new ESLintPlugin({ configType: 'flat', failOnError: false }),
-    );
+      plugins.push(new ESLintPlugin({ configType: 'flat', failOnError: false }));
+    }
   }
 
   return plugins;

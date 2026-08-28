@@ -24,7 +24,15 @@ export class NavPrimaryViewTraits extends SpyneTrait {
 
   static nav$UIHeaderNavViewOnRouteChangeEvent(e) {
     const { pageId } = e.payload;
-    const activeSel = `a.nav[data-page-id='${pageId}']`;
-    this.props.el$('a.nav').setActiveItem('selected', activeSel);
+    /**
+     * The 'home' link is removed from the header navigation.
+     * See NavPrimaryView to enable home in main nav.
+     *
+     * */
+
+    if (pageId !== 'home') {
+      const activeSel = `a.nav[data-page-id='${pageId}']`;
+      this.props.el$('a.nav').setActiveItem('selected', activeSel);
+    }
   }
 }

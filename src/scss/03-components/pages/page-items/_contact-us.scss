@@ -5,6 +5,41 @@
   flex-direction: column;
   gap: 1.5rem;
   max-inline-size: 720px;
+  // holds the section's footprint when the form is replaced by the status
+  // message, so the page below it does not jump on submit
+  min-block-size: 30rem;
+
+  .contact-us__status {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    min-block-size: inherit;
+
+    .contact-us__status-title {
+      margin: 0;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    .contact-us__status-msg {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+    }
+  }
+
+  &.contact-us--submitted {
+
+    .contact-us__status {
+      display: flex;
+    }
+
+    .contact-us__form-holder {
+      display: none;
+    }
+
+  }
 
   .contact-subtitle {
     font-size: 1.2rem;
@@ -12,7 +47,7 @@
     margin: 0 0 1rem;
   }
 
-  .form-field {
+  .contact-us__field {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
@@ -33,7 +68,7 @@
     }
   }
 
-  .form-actions {
+  .contact-us__actions {
     margin-block-start: 0.5rem;
   }
 }

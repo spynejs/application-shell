@@ -1,5 +1,7 @@
-// Products — CATALOG grammar, Tailwind-card treatment: paper surface,
-// hairline ring + soft shadow, full-bleed square image, padded text block.
+// Products — Tailwind PRODUCT LIST layout: bare rounded image; below it one
+// row with name + variant stacked left (small, light) and price right
+// (small, medium). NO card chrome, NO hover — never reads as a clickable
+// panel (nav cards own that affordance).
 .page-item--products {
   --cols: 3;
 
@@ -29,28 +31,19 @@
   .products-grid {
     display: grid;
     grid-template-columns: repeat(var(--cols), 1fr);
-    gap: 2rem;
+    gap: 2.5rem 1.5rem;
   }
 
   .product-tile {
     display: flex;
     flex-direction: column;
-    background: var(--paper);
-    border: 1px solid #8881;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    transition: box-shadow 0.2s ease;
-
-    &:hover {
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    }
+    text-align: left;
   }
 
   .product-media {
-    /* 4:3 keeps the shot prominent without dominating the card
-       (1:1 read top-heavy at 3-col widths) */
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1;
+    border-radius: 0.25rem 0.25rem 0 0;
+    overflow: hidden;
     background: var(--surface);
   }
 
@@ -61,31 +54,32 @@
     display: block;
   }
 
-  .product-info-block,
-  .product-name,
-  .product-tagline,
-  .product-price {
-    padding-inline: 1.25rem;
+  // caption bar: tinted background + padding lifts text contrast and keeps
+  // it off the edges, without card chrome (no border, no shadow, no hover)
+  .product-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.7rem 0.85rem 0.8rem;
+    background: var(--paper);
+    border-radius: 0 0 0.25rem 0.25rem;
   }
 
   .product-name {
     margin: 0;
-    padding-block-start: 1.1rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    line-height: 1.35;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--text-secondary);
   }
 
-  .product-tagline {
-    margin: 0;
-    padding-block-start: 0.3rem;
+  .product-variant {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    line-height: 1.4;
     color: var(--text-muted);
-    font-size: 0.85rem;
-    line-height: 1.45;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
 
     &:empty {
       display: none;
@@ -93,10 +87,12 @@
   }
 
   .product-price {
-    margin-block-start: auto;
-    padding-block: 0.75rem 1.25rem;
-    font-size: 0.95rem;
-    font-weight: 700;
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text-primary);
+    white-space: nowrap;
 
     &:empty {
       display: none;
@@ -108,5 +104,32 @@
   }
   @media (max-width: 520px) {
     --cols: 1;
+  }
+}
+
+/* House gotcha: main#app h3/p typography (ID specificity) overrides the
+   class-level type treatment — the list text rules must match that scope. */
+main#app .page-item--products {
+  .product-name {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .product-variant {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+    margin: 0.25rem 0 0;
+  }
+
+  .product-price {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text-primary);
+    margin: 0;
   }
 }

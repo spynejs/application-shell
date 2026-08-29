@@ -9,9 +9,13 @@
       <div class="product-media">
         <img class="product-img" alt="{{name}}" src="{{attrImageSrc}}" />
       </div>
-      <h3 class="product-name">{{name}}</h3>
-      <p class="product-tagline">{{tagline}}</p>
-      <div class="product-price">{{price}}</div>
+      <div class="product-row">
+        <div class="product-copy">
+          <h3 class="product-name">{{name}}</h3>
+          <p class="product-variant">{{variant}}</p>
+        </div>
+        <p class="product-price">{{price}}</p>
+      </div>
     </div>
     {{/products}}
   </div>

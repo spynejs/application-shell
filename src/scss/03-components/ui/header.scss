@@ -80,7 +80,7 @@
 
     a.nav {
       text-decoration: none;
-      color: var(--text-link);
+      color: var(--nav-link, var(--text-link));
       text-transform: uppercase;
       font-weight: 500;
       font-size: 0.875rem;

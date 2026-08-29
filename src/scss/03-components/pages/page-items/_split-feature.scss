@@ -45,6 +45,24 @@
     color: var(--text-muted);
   }
 
+  // CTA renders as a standard design-system button; only spacing +
+  // empty-collapse live here (rows without CTA copy disappear cleanly)
+  .split-cta {
+    margin-block-start: 1.25rem;
+    align-self: flex-start;
+    text-decoration: none;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .split-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   @media (max-width: 860px) {
     .split-row {
       grid-template-columns: 1fr;

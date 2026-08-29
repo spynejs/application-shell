@@ -8,6 +8,36 @@
       line-height: 1.2;
       margin-block-end: 0.5rem;
     }
+
+    .article-subheadline {
+      margin: 0;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+
+      &:empty {
+        display: none;
+      }
+    }
+  }
+
+  .article-media {
+    max-inline-size: 680px;
+    margin: 0 auto 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+
+    .article-img {
+      inline-size: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+    }
+
+    // articles without an image collapse the media block entirely
+    &:has(img[src='']) {
+      display: none;
+    }
   }
 
   .article-body {

@@ -4,11 +4,12 @@
   --card-bg: var(--paper, #fff);
   --card-text-color: #333;
   --card-meta-color: #666;
-  --card-radius: 6px;
-  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.08);
+  --card-radius: 0.5rem;
+  --card-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
 
-  /* Default card image ratio (from spacing tokens) */
-  --card-image-ratio-default: var(--card-image-ratio-wide);
+  /* Consistent media band across every card in a row */
+  --card-image-ratio-default: 16 / 9;
 }
 
 [data-theme='light'] .page-card {
@@ -26,15 +27,22 @@
 }
 
 .page-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: var(--card-text-color);
   background-color: var(--card-bg);
+  border: 1px solid #8881;
   border-radius: var(--card-radius);
   box-shadow: var(--card-shadow);
   overflow: hidden;
   position: relative;
   height: 100%;
+  transition: box-shadow 0.2s ease;
+}
+
+.page-card:hover {
+  box-shadow: var(--card-shadow-hover);
 }
 
 .page-card:focus {
@@ -62,7 +70,10 @@
 /* ---------------------------------------- */
 
 .card__content {
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.1rem 1.25rem 1.25rem;
   text-align: left;
 }
 
@@ -78,13 +89,37 @@
   font-size: 0.9rem;
   line-height: 1.4;
 
+  &:empty {
+    display: none;
+  }
+
   &.card__meta__cta {
-    color: palette.$Primary-400;
+    /* pinned to the card bottom so every CTA in a row sits on one line */
+    margin: auto 0 0;
+    padding-block-start: 0.75rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--brand, palette.$Primary-400);
   }
 }
 
 .card__cta {
-  font-weight: bold;
-  color: #007acc;
-  font-size: 0.95rem;
+  /* pinned to the card bottom so every CTA in a row sits on one line */
+  margin-block-start: auto;
+  padding-block-start: 0.75rem;
+  font-weight: 600;
+  color: var(--brand, #007acc);
+  font-size: 0.9rem;
+}
+
+/* main#app p (ID specificity) overrides class margins — this pin must match it.
+   House rule: any margin-based layout on <p> inside the app scope needs this. */
+main#app .card__meta.card__meta__cta {
+  margin: auto 0 0;
+}
+
+/* The design system injects card vars inside main#app — :root loses by
+   proximity, so the ratio override must live at the same scope. */
+main#app {
+  --card-image-ratio-default: 16 / 9;
 }

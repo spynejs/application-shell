@@ -5,6 +5,13 @@
   min-width: 0;
 }
 
+/* breathing room before whatever section follows the grid.
+   main#app element resets (ID specificity) zero out class-level padding on
+   the ul — the rule must live at the same scope (house gotcha #4). */
+main#app .cards-container {
+  padding-block-end: 3rem;
+}
+
 .card-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

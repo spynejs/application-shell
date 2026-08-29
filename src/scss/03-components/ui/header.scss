@@ -90,6 +90,14 @@
 
       transition: color 0.2s ease;
 
+      /*
+      *  HIDING THE HOME LINK IN HEADER
+      *  SINCE LOGO ALREADY LINKS TO LANDING PAGE
+      **/
+      &[data-page-id='home']{
+       display: none;
+      }
+
       &:hover,
       &.selected {
         color: var(--link-selected);

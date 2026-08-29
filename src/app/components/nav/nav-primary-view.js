@@ -7,7 +7,6 @@ export class NavPrimaryView extends ViewStream {
     props.class = 'site-nav';
     props.tagName = 'nav';
     props['aria-label'] = 'Main Navigation';
-    props.data = props.data.filter(o=>o.pageId!=='home');
     props.template = UIHeaderNavTmpl;
     props.traits = [NavPrimaryViewTraits];
     props.channels = ['CHANNEL_ROUTE', 'CHANNEL_APP', 'CHANNEL_LOCAL_STORAGE'];

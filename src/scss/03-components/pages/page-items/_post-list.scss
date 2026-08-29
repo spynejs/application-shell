@@ -16,7 +16,7 @@
 
   .post-row {
     display: grid;
-    grid-template-columns: 7rem 1fr;
+    grid-template-columns: minmax(7rem, max-content) 1fr;
     gap: 1.25rem;
     padding-block-end: 1.75rem;
     border-block-end: 1px solid #8882;

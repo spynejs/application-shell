@@ -16,7 +16,10 @@
         var(--#{$prefixVar}duration-200)
         var(--#{$prefixVar}ease-in-out);
 
-      &:hover {
+      // Anchors styled as buttons (.btn) opt out of link-state colors —
+      // their color comes from the semantic button variants in every state,
+      // so themed on-colors (incl. dark text on light primaries) hold.
+      &:hover:not(.btn) {
         color: color-mix(
           in srgb,
           var(--#{$prefixVar}text-link) 85%,
@@ -34,19 +37,12 @@
           color-mix(in srgb, var(--#{$prefixVar}text-link) 40%, transparent);
       }
 
-      &:visited {
+      &:visited:not(.btn) {
         color: color-mix(
           in srgb,
           var(--#{$prefixVar}text-link) 50%,
           var(--#{$prefixVar}primary-300)
         );
-        &.btn {
-          color: color-mix(
-            in srgb,
-            var(--#{$prefixVar}text-link) 10%,
-            var(--#{$prefixVar}neutral-100)
-          );
-        }
       }
     }
   } @else {

@@ -19,13 +19,17 @@
       // Anchors styled as buttons (.btn) opt out of link-state colors —
       // their color comes from the semantic button variants in every state,
       // so themed on-colors (incl. dark text on light primaries) hold.
-      &:hover:not(.btn) {
+      // :where() keeps the exclusion at zero specificity: a bare :not(.btn)
+      // outranks component rules like the header's `a.nav` and logo hover,
+      // which set text-decoration: none and must keep winning.
+      &:hover:where(:not(.btn)) {
         color: color-mix(
           in srgb,
           var(--#{$prefixVar}text-link) 85%,
           var(--#{$prefixVar}paper)
         );
         text-decoration: underline;
+        text-underline-offset: 0.15em;
       }
 
       &:focus {
@@ -37,7 +41,7 @@
           color-mix(in srgb, var(--#{$prefixVar}text-link) 40%, transparent);
       }
 
-      &:visited:not(.btn) {
+      &:visited:where(:not(.btn)) {
         color: color-mix(
           in srgb,
           var(--#{$prefixVar}text-link) 50%,

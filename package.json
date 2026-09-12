@@ -23,7 +23,7 @@
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@spynejs/cms": "^0.4.11",
     "@spynejs/cms-adapter": "^0.1.6",
-    "@spynejs/grammar": "^0.3.0",
+    "@spynejs/grammar": "^0.3.1",
     "@web/dev-server": "^0.4.6",
     "@web/dev-server-esbuild": "^1.0.3",
     "@web/test-runner": "^1.0.0",

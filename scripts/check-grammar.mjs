@@ -71,8 +71,9 @@ check('installed spyne satisfies frameworkCompat', compatOk === true,
   `spyne ${spyneVersion} vs "${range}"${compatOk === null ? ' (range form not understood)' : ''}`);
 
 // 7. no stale references to the retired package name in tracked source
+const self = path.relative(root, fileURLToPath(import.meta.url));
 const tracked = execSync('git ls-files', { cwd: root, encoding: 'utf8' }).split('\n')
-  .filter((f) => /\.(js|mjs|json|md|html)$/.test(f) && !f.startsWith('node_modules/'));
+  .filter((f) => /\.(js|mjs|json|md|html)$/.test(f) && !f.startsWith('node_modules/') && f !== self);
 const stale = tracked.filter((f) => /@spynejs\/kb\b/.test(read(path.join(root, f))));
 check('no @spynejs/kb references in tracked source', stale.length === 0, stale.join(', ') || `${tracked.length} files scanned`);
 

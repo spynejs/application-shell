@@ -21,11 +21,12 @@ export class AppContainerTraits extends SpyneTrait {
   }
 
   static app$OnSettingsEvent(e) {
-    const { settingsType } = e.payload;
+    const { settingsType, settingsValue } = e.payload;
 
+    // CHANNEL_APP holds the mode; this view only applies it. Flipping the
+    // attribute locally would drift from what the storage channel persisted.
     if (settingsType === 'theme') {
-      const { theme } = this.props.el.dataset;
-      this.props.el.dataset.theme = theme === 'dark' ? 'light' : 'dark';
+      this.app$SetTheme(settingsValue);
     }
   }
 

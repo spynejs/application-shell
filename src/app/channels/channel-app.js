@@ -5,7 +5,7 @@ import { AppSettingsTraits } from 'traits/app/app-settings-traits.js';
 export class ChannelApp extends Channel {
   constructor(name, props = {}) {
     name = 'CHANNEL_APP';
-    props.sendCachedPayload = true;
+    props.replay = true;
     props.traits = [AppStatusTraits, AppSettingsTraits];
     super(name, props);
   }

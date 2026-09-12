@@ -10,7 +10,8 @@
     "lint": "eslint --config eslint.config.js",
     "lint:fix": "eslint --config eslint.config.js --fix",
     "format": "prettier --write 'src/**/*.{js,css,scss,html}'",
-    "test": "web-test-runner --config web-test-runner.config.js"
+    "test": "npm run test:grammar && web-test-runner --config web-test-runner.config.js",
+    "test:grammar": "node scripts/check-grammar.mjs"
   },
   "dependencies": {
     "dompurify": "^3.2.4",

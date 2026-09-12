@@ -102,6 +102,14 @@
       &.selected {
         color: var(--link-selected);
       }
+
+      // Hover underline sits clear of the uppercase text; the default
+      // offset hugs cap height and reads unpolished at this size.
+      &:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.4em;
+      }
     }
   }
 

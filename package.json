@@ -49,7 +49,7 @@
     "sass": "^1.84.0",
     "sass-loader": "^16.0.4",
     "sass-migrator": "^2.5.6",
-    "spyne-cli": "^0.6.2",
+    "spyne-cli": "^0.7.3",
     "spyne-plugin-console": "^0.5.5",
     "style-loader": "^4.0.0",
     "webpack": "^5.97.1",

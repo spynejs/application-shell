@@ -2,6 +2,7 @@
 import { SpyneApp } from 'spyne';
 import { SpynePluginConsole } from 'spyne-plugin-console';
 import { SpyneCmsPlugin } from '@spynejs/cms';
+import { CmsReadyNullView } from 'components/ui-elements/null-views/cms-ready-null-view.js';
 
 const cmsPluginConfig = {
   position: ['bottom', 'right'],
@@ -22,11 +23,17 @@ export const devToolsReady = new Promise((resolve) => {
   );
 
   /**
-   * Resolve once CMS wiring is complete.
-   * If the plugin exposes a lifecycle hook later,
-   * this can be replaced without touching consumers.
+   * Resolve once the CMS has settled: its registry lookup
+   * (CHANNEL_FETCH_REGISTRY_INFO) has answered. Data channels registered
+   * before that answer race it — whichever localhost server replies first
+   * decides whether the fetched data is proxified, and a lost race renders
+   * the page with no editable items until a refresh re-rolls it.
+   * The timeout keeps the app booting when the adapter is not running.
    */
-  requestAnimationFrame(() => {
+  const fallback = setTimeout(resolve, 5000);
+  const onReady = () => {
+    clearTimeout(fallback);
     resolve();
-  });
+  };
+  new CmsReadyNullView({ onReady }).appendToNull();
 });

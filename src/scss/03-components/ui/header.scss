@@ -120,6 +120,10 @@
 
   .site-nav {
     display: flex;
+    // Centre the row: without this the links stretch to the toggle's 2rem
+    // box and their text line sits at the top of it, reading ~2px above
+    // the icon's centre.
+    align-items: center;
     gap: 1rem;
 
     a.nav {

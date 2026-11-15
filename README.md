@@ -64,6 +64,17 @@ routes must resolve to `index.html`, and requests for static assets must be
 served directly. See [HOSTING.md](HOSTING.md) for platform-specific
 configuration.
 
+## Images
+
+The photographs in `src/static/imgs/` are placeholders from
+[Pexels](https://www.pexels.com), provided under the
+[Pexels License](https://www.pexels.com/license/). They are not covered by this
+project's MIT license. If you keep them, you are responsible for following the
+Pexels terms; if you replace them, remove the `photoCredit` entry from
+`src/static/data/app.model.json` to drop the footer credit. See
+[NOTICE.md](NOTICE.md) for details and photo credits.
+
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Source code: MIT — see [LICENSE](LICENSE). Photographs are excluded; see
+[NOTICE.md](NOTICE.md).

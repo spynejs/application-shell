@@ -26,7 +26,17 @@ export class AppStatusTraits extends SpyneTrait {
 
     const { navLinks, isDeepLink, routeData } = e['CHANNEL_ROUTE'].payload;
     const { footer, header } = e['CHANNEL_FETCH_MODEL'].payload.text;
-    this.props.initData = { navLinks, isDeepLink, routeData, footer, header };
+    // Optional authored node ({ label, attrHref }) crediting the image source.
+    // Passed through as-is; absent means the footer renders no credit.
+    const { photoCredit } = e['CHANNEL_FETCH_MODEL'].payload;
+    this.props.initData = {
+      navLinks,
+      isDeepLink,
+      routeData,
+      footer,
+      header,
+      photoCredit,
+    };
 
     try {
       this.appStatus$SendDataEvent(routeData, true);

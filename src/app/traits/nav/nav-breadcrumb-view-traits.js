@@ -64,7 +64,15 @@ export class NavBreadcrumbViewTraits extends SpyneTrait {
     }
 
     this.props.link$.el.innerText = navLink.title;
-    this.props.link$.el.href = navLink.href;
+
+    // Only ancestors link "up". The terminal crumb is the current page: with
+    // no href it leaves the tab order and reads as text (the --inactive class
+    // gates pointer interaction in CSS).
+    if (isActive) {
+      this.props.link$.el.href = navLink.href;
+    } else {
+      this.props.link$.el.removeAttribute('href');
+    }
 
     // Write this link's route coordinates into its dataset — dataset reads are
     // live, so the crumb remains a correct ROUTE link as the app navigates.

@@ -76,6 +76,12 @@
         cursor: pointer;
       }
 
+      /* Inactive: the current page's crumb is text, not a link */
+      &.breadcrumb-item--inactive a {
+        pointer-events: none;
+        cursor: default;
+      }
+
       /* For the anchor inside li */
       a {
         text-decoration: none;

@@ -176,3 +176,79 @@ describe('navBreadcrumbView$DeriveState — three-level routes', () => {
     ).to.eq('PRIMARY');
   });
 });
+
+describe('navBreadcrumbView$UpdateLink — only ancestor crumbs are live links', () => {
+  // Drives the DOM-applying method against real elements, with the view
+  // context it expects (props.el, el$, link$) supplied by hand.
+  const makeCrumb = (props) => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.dataset.channel = 'ROUTE';
+    li.appendChild(a);
+
+    const context = {
+      props: {
+        ...props,
+        el: li,
+        el$: { setClass: (className) => (li.className = className) },
+        link$: { el: a },
+      },
+      navBreadcrumbView$DeriveState: (payload) =>
+        NavBreadcrumbViewTraits.navBreadcrumbView$DeriveState(
+          payload,
+          context.props,
+        ),
+    };
+    const update = (payload) =>
+      NavBreadcrumbViewTraits.navBreadcrumbView$UpdateLink.call(context, {
+        payload,
+      });
+
+    return { li, a, update };
+  };
+
+  it('should leave the current page crumb without an href on a one-level route', () => {
+    const page = makeCrumb(propsPage);
+    page.update(payloadAbout);
+
+    expect(page.a.innerText).to.eq('ABOUT');
+    expect(page.a.hasAttribute('href')).to.be.false;
+    expect(page.li.classList.contains('breadcrumb-item--inactive')).to.be.true;
+    expect(page.li.getAttribute('aria-current')).to.eq('page');
+  });
+
+  it('should link the ancestor and not the current page on a two-level route', () => {
+    const page = makeCrumb(propsPage);
+    const card = makeCrumb(propsCard);
+    page.update(payloadCardFlyingTech);
+    card.update(payloadCardFlyingTech);
+
+    expect(page.a.hasAttribute('href')).to.be.true;
+    expect(page.li.classList.contains('breadcrumb-item--active')).to.be.true;
+
+    expect(card.a.innerText).to.eq('FLYING TECH');
+    expect(card.a.hasAttribute('href')).to.be.false;
+    expect(card.li.classList.contains('breadcrumb-item--inactive')).to.be.true;
+  });
+
+  it('should restore and drop the href as the route moves down and back up', () => {
+    const page = makeCrumb(propsPage);
+
+    page.update(payloadAbout);
+    expect(page.a.hasAttribute('href')).to.be.false;
+
+    page.update(payloadCardFlyingTech);
+    expect(page.a.hasAttribute('href')).to.be.true;
+
+    page.update(payloadAbout);
+    expect(page.a.hasAttribute('href')).to.be.false;
+  });
+
+  it('should keep the anchor a dataset ROUTE link in every state', () => {
+    const page = makeCrumb(propsPage);
+    page.update(payloadAbout);
+    expect(page.a.dataset.channel).to.eq('ROUTE');
+    page.update(payloadCardFlyingTech);
+    expect(page.a.dataset.channel).to.eq('ROUTE');
+  });
+});

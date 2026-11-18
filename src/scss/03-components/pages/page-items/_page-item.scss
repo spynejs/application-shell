@@ -56,6 +56,28 @@
   }
 
   /* --------------------------------------------------
+     Under a hero
+     --------------------------------------------------
+     A page's hero stands in .page-heading and its
+     page-items in .page-body, so the rhythm above does
+     not reach from the hero to the first of them, and
+     the two touched. The first thing in the body takes
+     the same space, where:
+       - the hero is the last thing in the heading. A
+         heading that goes on after its hero (a section
+         title under it) brings its own space;
+       - that first thing is a page-item or the cards
+         of a list page, which have no space of their
+         own above them. A title written into the body
+         with its own margin is left as it is.
+  -------------------------------------------------- */
+  .page-heading:has(> .hero-component:last-child)
+    + .page-body
+    > :is(.page-item, .cards-container):first-child {
+    margin-top: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  /* --------------------------------------------------
      Page Item Modifiers
      --------------------------------------------------
      These are opt-in adjustments to the default

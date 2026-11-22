@@ -23,6 +23,14 @@ export class StageContainerTraits extends SpyneTrait {
     this.appendView(new PageClass({ data, isDeepLink }), '.page-container');
   }
 
+  // The page a link leads to is shown from its top. The page changes in the
+  // same instant as the route, so the window is moved then. A move by the
+  // browser's own Back or Forward is not admitted (stage-container.js): the
+  // browser puts the window back where that page was left.
+  static stage$ArriveAtTop() {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }
+
   static stage$OnAppInitEvent(e) {
     this.stage$OnRouteEvent(e, true);
   }

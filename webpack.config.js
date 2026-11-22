@@ -35,7 +35,15 @@ export default (env = { mode: 'development' }) => {
 
   const assetsFolder = isProduction ? `${ASSETS_DIR}/` : '';
   const imgPath = `${PUBLIC_PATH}${assetsFolder}static/imgs/`;
-  const sassStaticDir = isProduction ? `././../static/` : './static/';
+  // Static files as a stylesheet names them (fonts). A production build keeps its
+  // stylesheet in a file, so the address is relative to that file: it holds at any
+  // depth, and under a sub-path. A dev build puts the stylesheet into the page, where
+  // a relative address is read against the page's own: right at /about, wrong at
+  // /about/team, which would ask for /about/static/… and get nothing. So a dev build
+  // names static files from the public path, as imgPath does.
+  const sassStaticDir = isProduction
+    ? `././../static/`
+    : `${PUBLIC_PATH}static/`;
 
   /**
    * Inline lint is opt-in: `--env lint` or SPYNE_LINT=1. Off by default so

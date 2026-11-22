@@ -79,3 +79,10 @@
     }
   }
 }
+
+// The rule above that hides a row's button with no words loses to the design
+// system's `main#app .btn`, which sets `display` with an id's weight: the empty
+// button was drawn, a small pill with nothing on it. Under main#app it holds.
+main#app .page-item--split-feature .split-cta:empty {
+  display: none;
+}

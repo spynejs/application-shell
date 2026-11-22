@@ -144,3 +144,11 @@
     }
   }
 }
+
+// A hero with no words for its button has no button (its ctaText is empty): the
+// template writes the words with nothing around them, so the anchor is empty.
+// Written under main#app: the design system's `main#app .btn` sets `display` with an
+// id's weight, and a rule without one loses to it and the empty button is drawn.
+main#app .hero-component .hero__cta:empty {
+  display: none;
+}

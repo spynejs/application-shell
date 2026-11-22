@@ -5,7 +5,18 @@
     <li class="post-row">
       <span class="post-date">{{date}}</span>
       <div class="post-main">
-        <h3 class="post-title"><a class="post-link" href="{{href}}">{{title}}</a></h3>
+        <h3 class="post-title">
+          <a
+            class="post-link"
+            data-channel="ROUTE"
+            data-event-prevent-default="true"
+            data-page-id="{{attrPageId}}"
+            data-topic-id="{{attrTopicId}}"
+            data-end-route="true"
+            href="{{href}}"
+            >{{title}}</a
+          >
+        </h3>
         <p class="post-excerpt">{{excerpt}}</p>
       </div>
     </li>

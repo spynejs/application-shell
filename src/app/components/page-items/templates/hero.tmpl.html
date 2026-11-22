@@ -3,9 +3,16 @@
     <span class="hero__eyebrow">{{eyebrow}}</span>
     <h1 class="hero__headline">{{headline}}</h1>
     <div class="hero__subheadline">{{subheadline}}</div>
-    <a class="btn btn-primary px-8 hero__cta" href="{{attrCtaHref}}">
-      {{ctaText}}
-    </a>
+    <a
+      class="btn btn-primary px-8 hero__cta"
+      data-channel="ROUTE"
+      data-event-prevent-default="true"
+      data-page-id="{{attrPageId}}"
+      data-topic-id="{{attrTopicId}}"
+      data-end-route="true"
+      href="{{attrCtaHref}}"
+      >{{ctaText}}</a
+    >
   </div>
   <div class="hero__image">
     <img src="{{attrImageSrc}}" alt="{{attrImageAlt}}" />

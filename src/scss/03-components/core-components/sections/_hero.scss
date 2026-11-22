@@ -145,10 +145,20 @@
   }
 }
 
-// A hero with no words for its button has no button (its ctaText is empty): the
-// template writes the words with nothing around them, so the anchor is empty.
+// When a hero has no button.
+//
+// - It has no words for one (its ctaText is empty): the template writes the words
+//   with nothing around them, so the anchor is empty.
+// - It has nowhere to go (its attrPageId is empty). The button is a ROUTE anchor, and
+//   a ROUTE anchor with an empty page id goes to the start of the site, which is
+//   never what a hero's button is for. This is the page that holds the contact form:
+//   every other hero's button leads to it, and it needs none, the form being there.
+//   The words alone would not do in a dev build, where the editing tools wrap them
+//   so that they can be clicked, and a wrapped nothing is not empty.
+//
 // Written under main#app: the design system's `main#app .btn` sets `display` with an
-// id's weight, and a rule without one loses to it and the empty button is drawn.
-main#app .hero-component .hero__cta:empty {
+// id's weight, and a rule without one loses to it and the button is drawn.
+main#app .hero-component .hero__cta:empty,
+main#app .hero-component .hero__cta[data-page-id=''] {
   display: none;
 }

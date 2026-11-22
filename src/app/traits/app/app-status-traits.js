@@ -1,4 +1,10 @@
-import { SpyneTrait, ChannelPayloadFilter, safeClone } from 'spyne';
+import {
+  SpyneTrait,
+  ChannelPayloadFilter,
+  SpyneAppProperties,
+  safeClone,
+} from 'spyne';
+import { routeCallsToAction } from 'traits/utils/call-to-action-routes.js';
 
 export class AppStatusTraits extends SpyneTrait {
   constructor(context) {
@@ -88,7 +94,28 @@ export class AppStatusTraits extends SpyneTrait {
     payload.initData = initData;
     payload.is404 = is404Route;
 
+    /**
+     * Every call to action of the page is given somewhere to go: one that
+     * names no page of the app leads to the contact page
+     * (traits/utils/call-to-action-routes.js). Done here, on this copy, so
+     * that every view receives data it can render as it is.
+     */
+    this.appStatus$RouteCallsToAction(payload);
+
     this.sendChannelPayload(action, payload);
+  }
+
+  static appStatus$RouteCallsToAction(pageData, model = this.props.data) {
+    // The address the framework writes for route ids, from the site's root: for
+    // routes written as paths it gives `about`, which a browser would read from
+    // the page it is on. (The click does not use it; a new tab would.)
+    const hrefOf = (routeIds) => {
+      const href = SpyneAppProperties.getHrefFromData(routeIds);
+
+      return /^[/?#]/.test(href) ? href : `/${href}`;
+    };
+
+    return routeCallsToAction(pageData, model, hrefOf);
   }
 
   /**

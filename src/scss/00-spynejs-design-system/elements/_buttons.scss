@@ -25,6 +25,17 @@
       cursor: not-allowed;
       pointer-events: none;
     }
+
+    // A button that is a link of the app and has nowhere to go is not drawn. A ROUTE
+    // anchor with an empty page id leads to the start of the site, which no button
+    // with words on it means. The app gives every call to action somewhere to go
+    // before its page is shown (traits/utils/call-to-action-routes.js), so the one
+    // left with nowhere is on the page the others lead to, the one that holds the
+    // contact form, where it is not needed. It is told by the id, not by the words
+    // being empty: the editing tools wrap a button's words, empty or not.
+    &[data-channel='ROUTE'][data-page-id=''] {
+      display: none;
+    }
   }
 
   @each $name, $tokens in $semantic-colors {

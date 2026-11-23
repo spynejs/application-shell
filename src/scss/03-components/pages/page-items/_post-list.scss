@@ -2,10 +2,6 @@
   max-inline-size: 720px;
   margin: 0 auto;
 
-  .post-list-title {
-    margin-block-end: 2rem;
-  }
-
   .post-list {
     list-style: none;
     margin: 0;
@@ -56,4 +52,12 @@
       gap: 0.35rem;
     }
   }
+}
+
+/* House gotcha: main#app h2 typography (ID specificity) overrides a class-level
+   margin — the title asked for 2rem under it and got the h2's 12px, so it sat on
+   its own content. The space between a heading and what it heads is the same in
+   every page item that is a titled list: --spacing-10. */
+main#app .page-item--post-list .post-list-title {
+  margin-block-end: var(--spacing-10);
 }

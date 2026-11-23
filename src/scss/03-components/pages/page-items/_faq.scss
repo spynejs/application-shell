@@ -4,7 +4,6 @@
 
   .faq-title {
     text-align: center;
-    margin-block-end: 2rem;
   }
 
   .faq-list {
@@ -44,4 +43,12 @@
       }
     }
   }
+}
+
+/* House gotcha: main#app h2 typography (ID specificity) overrides a class-level
+   margin — the title asked for 2rem under it and got the h2's 12px, so it sat on
+   its own content. The space between a heading and what it heads is the same in
+   every page item that is a titled list: --spacing-10. */
+main#app .page-item--faq .faq-title {
+  margin-block-end: var(--spacing-10);
 }

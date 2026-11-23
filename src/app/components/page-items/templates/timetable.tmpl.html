@@ -1,0 +1,29 @@
+<div class="page-item--timetable">
+  <header class="timetable-header">
+    <h2 class="timetable-title">{{title}}</h2>
+    <p class="timetable-subtitle">{{subtitle}}</p>
+  </header>
+  <ul class="timetable-rows" role="list">
+    {{#rows}}
+    <li class="timetable-row">
+      <p class="timetable-when">{{when}}</p>
+      <div class="timetable-what">
+        <h3 class="timetable-name">{{name}}</h3>
+        <p class="timetable-detail">{{detail}}</p>
+      </div>
+      <p class="timetable-note">{{note}}</p>
+    </li>
+    {{/rows}}
+  </ul>
+  <p class="timetable-footnote">{{footnote}}</p>
+  <a
+    class="timetable-cta btn btn-primary"
+    data-channel="ROUTE"
+    data-event-prevent-default="true"
+    data-page-id="{{attrPageId}}"
+    data-topic-id="{{attrTopicId}}"
+    data-end-route="true"
+    href="{{attrCtaHref}}"
+    >{{ctaText}}</a
+  >
+</div>

@@ -1,0 +1,140 @@
+// Timetable: a titled list of sessions. Each row says when, what, and optionally
+// a line of detail and a short note at the row's end. No photographs.
+//
+// The rows share their columns (subgrid), so every "when" is as wide as the widest
+// and the names line up under one another. On a phone a row stacks.
+//
+// Words a row may leave out (detail, note) have no margin of their own, so a row
+// without them is simply shorter. The subtitle and the footnote do have space
+// around them and are not drawn when empty. With the editing tools on, an empty
+// one keeps its place: that is where an author fills it in.
+//
+// Surface (background / radius / elevation) comes from the .page-item container
+// contract; this partial only lays out the content.
+.page-item--timetable {
+  display: flex;
+  flex-direction: column;
+  max-inline-size: 820px;
+  margin: 0 auto;
+
+  .timetable-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-block-end: 2rem;
+  }
+
+  .timetable-subtitle {
+    max-inline-size: 560px;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .timetable-rows {
+    display: grid;
+    grid-template-columns: fit-content(15rem) 1fr fit-content(11rem);
+    column-gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-block-start: 1px solid #8882;
+  }
+
+  .timetable-row {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: baseline;
+    padding-block: 1rem;
+    border-block-end: 1px solid #8882;
+  }
+
+  .timetable-when {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .timetable-note {
+    text-align: end;
+  }
+
+  .timetable-footnote {
+    text-align: center;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  // The button is a standard design-system button; only spacing lives here.
+  .timetable-cta {
+    align-self: center;
+    margin-block-start: 1.75rem;
+    text-decoration: none;
+  }
+
+  // Under this width the name's column is too narrow to read beside the other
+  // two, so a row stacks: when, what, detail, note.
+  @media (max-width: 720px) {
+    .timetable-rows,
+    .timetable-row {
+      display: block;
+    }
+
+    .timetable-note {
+      text-align: start;
+    }
+  }
+}
+
+/* House gotcha: main#app h2/h3/p typography (ID specificity) overrides the
+   class-level type treatment — the text rules must match that scope.
+   The quieter words take --text-secondary, not --text-muted: on a page item's
+   surface in the dark theme --text-muted is under 3:1, too faint for small text. */
+main#app .page-item--timetable {
+  .timetable-title {
+    margin: 0;
+  }
+
+  .timetable-subtitle {
+    margin: 0.5rem 0 0;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .timetable-when {
+    margin: 0;
+    color: var(--brand);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .timetable-name {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    line-height: 1.35;
+  }
+
+  .timetable-detail {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .timetable-note {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .timetable-footnote {
+    margin: 1.25rem 0 0;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}

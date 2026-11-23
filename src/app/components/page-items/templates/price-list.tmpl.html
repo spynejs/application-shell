@@ -1,0 +1,31 @@
+<div class="page-item--price-list">
+  <header class="price-list-header">
+    <h2 class="price-list-title">{{title}}</h2>
+    <p class="price-list-subtitle">{{subtitle}}</p>
+  </header>
+  <ul class="price-list-items" role="list">
+    {{#items}}
+    <li class="price-list-item">
+      <div class="price-list-what">
+        <h3 class="price-list-name">{{name}}</h3>
+        <p class="price-list-desc">{{desc}}</p>
+      </div>
+      <p class="price-list-cost">
+        <span class="price-list-price">{{price}}</span>
+        <span class="price-list-unit">{{unit}}</span>
+      </p>
+    </li>
+    {{/items}}
+  </ul>
+  <p class="price-list-footnote">{{footnote}}</p>
+  <a
+    class="price-list-cta btn btn-primary"
+    data-channel="ROUTE"
+    data-event-prevent-default="true"
+    data-page-id="{{attrPageId}}"
+    data-topic-id="{{attrTopicId}}"
+    data-end-route="true"
+    href="{{attrCtaHref}}"
+    >{{ctaText}}</a
+  >
+</div>

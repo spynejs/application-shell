@@ -1,0 +1,133 @@
+// Price list: a titled list of named things with a price: services, a menu, rates,
+// memberships. Each has an optional line of description, and an optional unit under
+// its price ("per wheel"). No photographs. A page may hold more than one, each with
+// its own title: a menu's starters and mains.
+//
+// Words an item may leave out (description, unit) have no margin of their own, so
+// an item without them is simply shorter. The subtitle and the footnote do have
+// space around them and are not drawn when empty. With the editing tools on, an
+// empty one keeps its place: that is where an author fills it in.
+//
+// Surface (background / radius / elevation) comes from the .page-item container
+// contract; this partial only lays out the content.
+.page-item--price-list {
+  display: flex;
+  flex-direction: column;
+  max-inline-size: 720px;
+  margin: 0 auto;
+
+  .price-list-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-block-end: 2rem;
+  }
+
+  .price-list-subtitle {
+    max-inline-size: 560px;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .price-list-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-block-start: 1px solid #8882;
+  }
+
+  // The name keeps the room; the price takes what it needs, up to a little under
+  // half the row, and wraps inside that on a narrow screen.
+  .price-list-item {
+    display: grid;
+    grid-template-columns: 1fr fit-content(45%);
+    column-gap: 1.5rem;
+    align-items: baseline;
+    padding-block: 1rem;
+    border-block-end: 1px solid #8882;
+  }
+
+  .price-list-cost {
+    text-align: end;
+  }
+
+  .price-list-price,
+  .price-list-unit {
+    display: block;
+  }
+
+  .price-list-price {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .price-list-footnote {
+    text-align: center;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  // The button is a standard design-system button; only spacing lives here.
+  .price-list-cta {
+    align-self: center;
+    margin-block-start: 1.75rem;
+    text-decoration: none;
+  }
+}
+
+/* House gotcha: main#app h2/h3/p typography (ID specificity) overrides the
+   class-level type treatment — the text rules must match that scope.
+   The quieter words take --text-secondary, not --text-muted: on a page item's
+   surface in the dark theme --text-muted is under 3:1, too faint for small text. */
+main#app .page-item--price-list {
+  .price-list-title {
+    margin: 0;
+  }
+
+  .price-list-subtitle {
+    margin: 0.5rem 0 0;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .price-list-name {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    line-height: 1.35;
+  }
+
+  .price-list-desc {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .price-list-cost {
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .price-list-price {
+    color: var(--text-primary);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+  }
+
+  .price-list-unit {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .price-list-footnote {
+    margin: 1.25rem 0 0;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}

@@ -3,23 +3,41 @@
 // its price ("per wheel"). No photographs. A page may hold more than one, each with
 // its own title: a menu's starters and mains.
 //
-// Its type is the page items' own, as the FAQ beside it draws it, and the same as
-// the timetable's: the title is the app's h2, an item's name and its price are the
-// body size in semibold (a FAQ's question), and the description is the body size in
-// regular (a FAQ's answer). Only the unit and the footnote are smaller, at the
-// small size. Two sizes, two weights, no color of its own.
+// HOW IT IS ORGANIZED, the same as the timetable
+//
+// Three units, top to bottom: the heading, the list, the button. Space says which
+// words belong together, and it only ever grows as the units get larger:
+//
+//   inside a unit      none: a title's words, an item's lines, sit on their leading
+//   title to subtitle  --spacing-2   the subtitle is the title's, so it sits close
+//   an item            --spacing-4   above and below its words, a rule between items
+//   list to footnote   --spacing-3   the footnote is the list's, so it sits close
+//   unit to unit       --spacing-10  heading to list, and list to button
+//
+// The list is ruled above its first item and below its last, so it is one block.
+//
+// Two columns, and both are always full: what it is, and what it costs. The price
+// column is one fixed width in every item and every list on the page, and its
+// figures are set to its far edge, so the prices stand under one another. The
+// measure is narrow so a price is near the name it belongs to. An item is two
+// lines at most on each side, and they pair: name with price, description with
+// unit, each pair on one line.
+//
+// TYPE is the page items' own, as the FAQ beside it draws it: the title is the
+// app's h2, a name and its price are the body size in semibold, the description
+// the body size in regular; only the unit and the footnote are at the small size.
 //
 // Words an item may leave out (description, unit) have no margin of their own, so
-// an item without them is simply shorter. The subtitle and the footnote do have
-// space around them and are not drawn when empty. With the editing tools on, an
-// empty one keeps its place: that is where an author fills it in.
+// an item without them is simply shorter. The subtitle and the footnote have space
+// of their own and are not drawn when empty. With the editing tools on, an empty
+// one keeps its place: that is where an author fills it in.
 //
 // Surface (background / radius / elevation) comes from the .page-item container
 // contract; this partial only lays out the content.
 .page-item--price-list {
   display: flex;
   flex-direction: column;
-  max-inline-size: 720px;
+  max-inline-size: 600px;
   margin: 0 auto;
 
   .price-list-header {
@@ -27,6 +45,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    margin-block-end: var(--spacing-10);
   }
 
   .price-list-subtitle {
@@ -37,23 +56,19 @@
     }
   }
 
-  // The rhythm of the FAQ's list: the same space above and below each rule.
   .price-list-items {
-    display: grid;
-    row-gap: 1.25rem;
     list-style: none;
     margin: 0;
     padding: 0;
+    border-block-start: 1px solid #8882;
   }
 
-  // The name keeps the room; the price takes what it needs, up to a little under
-  // half the row, and wraps inside that on a narrow screen.
   .price-list-item {
     display: grid;
-    grid-template-columns: 1fr fit-content(45%);
-    column-gap: 1.5rem;
+    grid-template-columns: minmax(0, 1fr) 9rem;
+    column-gap: var(--spacing-8);
     align-items: baseline;
-    padding-block-end: 1.25rem;
+    padding-block: var(--spacing-4);
     border-block-end: 1px solid #8882;
   }
 
@@ -71,8 +86,6 @@
   }
 
   .price-list-footnote {
-    text-align: center;
-
     &:empty {
       display: none;
     }
@@ -81,18 +94,33 @@
   // The button is a standard design-system button; only spacing lives here.
   .price-list-cta {
     align-self: center;
-    margin-block-start: 1.75rem;
+    margin-block-start: var(--spacing-10);
     text-decoration: none;
+  }
+
+  // On a phone the price column gives back what it does not need.
+  @media (max-width: 560px) {
+    .price-list-item {
+      grid-template-columns: minmax(0, 1fr) fit-content(45%);
+      column-gap: var(--spacing-4);
+    }
   }
 }
 
-/* House gotcha: main#app h3/p typography (ID specificity) overrides the
-   class-level type treatment — the text rules must match that scope. The title
-   and the subtitle are left as the app draws an h2 and a p.
+/* House gotcha: main#app h2/h3/p typography (ID specificity) overrides the
+   class-level type treatment — the text and margin rules must match that scope.
    The quieter words take --text-secondary, as the app's own p does, not
    --text-muted: on a page item's surface in the dark theme --text-muted is under
    3:1, too faint for small text. */
 main#app .page-item--price-list {
+  .price-list-title {
+    margin: 0;
+  }
+
+  .price-list-subtitle {
+    margin: var(--spacing-2) 0 0;
+  }
+
   .price-list-name,
   .price-list-desc,
   .price-list-cost {
@@ -114,13 +142,16 @@ main#app .page-item--price-list {
     color: var(--text-secondary);
   }
 
-  .price-list-unit,
-  .price-list-footnote {
+  // The unit is smaller than the description it sits beside, on the same leading,
+  // so the two share a line.
+  .price-list-unit {
     font-size: var(--font-size-sm);
+    line-height: calc(var(--font-size-base) * var(--line-height-normal));
   }
 
   .price-list-footnote {
-    margin: 1.25rem 0 0;
+    margin: var(--spacing-3) 0 0;
+    font-size: var(--font-size-sm);
     line-height: var(--line-height-normal);
   }
 }

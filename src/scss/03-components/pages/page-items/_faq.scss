@@ -9,17 +9,19 @@
   .faq-list {
     margin: 0;
     display: grid;
-    gap: 1.25rem;
   }
 
+  // A row keeps the steps the other titled lists keep: --spacing-3 (12px) above
+  // and below its words and a rule under it, so two questions are 24px apart, the
+  // same as the title is over the list. A question and its answer are one thing
+  // and sit on their leading, with nothing between.
   .faq-item {
-    padding-block-end: 1.25rem;
+    padding-block: var(--spacing-3);
     border-block-end: 1px solid #8882;
   }
 
   .faq-q {
     font-weight: 600;
-    margin-block-end: 0.4rem;
   }
 
   .faq-a {

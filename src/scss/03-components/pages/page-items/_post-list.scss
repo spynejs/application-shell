@@ -7,14 +7,19 @@
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 1.75rem;
   }
 
+  // A row keeps the steps the other titled lists keep: --spacing-3 (12px) above
+  // and below its words and a rule under it, so two posts are 24px apart, the same
+  // as the title is over the list.
+  //
+  // The date's column is one fixed width. It used to be as wide as each row's own
+  // date, so a longer date pushed its title to the right of the one above.
   .post-row {
     display: grid;
-    grid-template-columns: minmax(7rem, max-content) 1fr;
+    grid-template-columns: 10rem 1fr;
     gap: 1.25rem;
-    padding-block-end: 1.75rem;
+    padding-block: var(--spacing-3);
     border-block-end: 1px solid #8882;
   }
 
@@ -61,4 +66,10 @@
    Material's own components keep between a headline and its content. */
 main#app .page-item--post-list .post-list-title {
   margin-block-end: var(--spacing-6);
+}
+
+// The same gotcha, for the excerpt: main#app p gave it 16px under it, inside the
+// row, on top of the row's own space.
+main#app .page-item--post-list .post-excerpt {
+  margin: 0;
 }

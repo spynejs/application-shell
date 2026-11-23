@@ -22,6 +22,10 @@ export class ChannelMenuDrawerTraits extends SpyneTrait {
       action: 'CHANNEL_APP_INIT_EVENT',
     });
 
+    const routeChangeFilter = new ChannelPayloadFilter({
+      action: 'CHANNEL_ROUTE_CHANGE_EVENT',
+    });
+
     this.getChannel('CHANNEL_WINDOW', breakPointFilter).subscribe(
       this.channelMenuDrawer$OnWindowEvent.bind(this),
     );
@@ -33,6 +37,18 @@ export class ChannelMenuDrawerTraits extends SpyneTrait {
     this.getChannel('CHANNEL_APP', appInitFilter).subscribe(
       this.channelMenuDrawer$OnMenuDrawerInit.bind(this),
     );
+
+    // Going to another page closes the drawer. Its links are ROUTE anchors, so a
+    // click on one is sent to CHANNEL_ROUTE and never reaches CHANNEL_UI, where the
+    // filter above listens: the drawer used to stay open over the page it had just
+    // led to, and on a phone it covers most of that page.
+    this.getChannel('CHANNEL_ROUTE', routeChangeFilter).subscribe(
+      this.channelMenuDrawer$OnRouteChange.bind(this),
+    );
+  }
+
+  static channelMenuDrawer$OnRouteChange() {
+    this.channelMenuDrawer$SendMenuDrawerEvent(false);
   }
 
   static channelMenuDrawer$OnMenuDrawerInit(e) {

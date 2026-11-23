@@ -1,8 +1,14 @@
 // Timetable: a titled list of sessions. Each row says when, what, and optionally
 // a line of detail and a short note at the row's end. No photographs.
 //
+// Its type is the page items' own, as the FAQ beside it draws it: the title is the
+// app's h2, a row's name is the body size in semibold (a FAQ's question), and every
+// other word is the body size in regular (a FAQ's answer). Only the note and the
+// footnote are smaller, at the small size. Two sizes, two weights, no color of its
+// own.
+//
 // The rows share their columns (subgrid), so every "when" is as wide as the widest
-// and the names line up under one another. On a phone a row stacks.
+// and the names line up under one another. On a narrow screen a row stacks.
 //
 // Words a row may leave out (detail, note) have no margin of their own, so a row
 // without them is simply shorter. The subtitle and the footnote do have space
@@ -22,7 +28,6 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-block-end: 2rem;
   }
 
   .timetable-subtitle {
@@ -33,14 +38,15 @@
     }
   }
 
+  // The rhythm of the FAQ's list: the same space above and below each rule.
   .timetable-rows {
     display: grid;
     grid-template-columns: fit-content(15rem) 1fr fit-content(11rem);
     column-gap: 1.5rem;
+    row-gap: 1.25rem;
     list-style: none;
     margin: 0;
     padding: 0;
-    border-block-start: 1px solid #8882;
   }
 
   .timetable-row {
@@ -48,7 +54,7 @@
     grid-column: 1 / -1;
     grid-template-columns: subgrid;
     align-items: baseline;
-    padding-block: 1rem;
+    padding-block-end: 1.25rem;
     border-block-end: 1px solid #8882;
   }
 
@@ -78,7 +84,10 @@
   // Under this width the name's column is too narrow to read beside the other
   // two, so a row stacks: when, what, detail, note.
   @media (max-width: 720px) {
-    .timetable-rows,
+    .timetable-rows {
+      grid-template-columns: 1fr;
+    }
+
     .timetable-row {
       display: block;
     }
@@ -89,52 +98,45 @@
   }
 }
 
-/* House gotcha: main#app h2/h3/p typography (ID specificity) overrides the
-   class-level type treatment — the text rules must match that scope.
-   The quieter words take --text-secondary, not --text-muted: on a page item's
-   surface in the dark theme --text-muted is under 3:1, too faint for small text. */
+/* House gotcha: main#app h3/p typography (ID specificity) overrides the
+   class-level type treatment — the text rules must match that scope. The title
+   and the subtitle are left as the app draws an h2 and a p.
+   The quieter words take --text-secondary, as the app's own p does, not
+   --text-muted: on a page item's surface in the dark theme --text-muted is under
+   3:1, too faint for small text. */
 main#app .page-item--timetable {
-  .timetable-title {
+  .timetable-when,
+  .timetable-name,
+  .timetable-detail,
+  .timetable-note {
     margin: 0;
-  }
-
-  .timetable-subtitle {
-    margin: 0.5rem 0 0;
-    color: var(--text-secondary);
-    line-height: 1.5;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
   }
 
   .timetable-when {
-    margin: 0;
-    color: var(--brand);
-    font-weight: 600;
-    line-height: 1.5;
+    color: var(--text-primary);
   }
 
   .timetable-name {
-    margin: 0;
-    font-size: var(--font-size-lg);
-    line-height: 1.35;
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
   }
 
-  .timetable-detail {
-    margin: 0;
+  .timetable-detail,
+  .timetable-note,
+  .timetable-footnote {
     color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.5;
   }
 
-  .timetable-note {
-    margin: 0;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.5;
+  .timetable-note,
+  .timetable-footnote {
+    font-size: var(--font-size-sm);
   }
 
   .timetable-footnote {
     margin: 1.25rem 0 0;
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    line-height: 1.5;
+    line-height: var(--line-height-normal);
   }
 }

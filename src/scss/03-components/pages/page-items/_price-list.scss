@@ -3,6 +3,12 @@
 // its price ("per wheel"). No photographs. A page may hold more than one, each with
 // its own title: a menu's starters and mains.
 //
+// Its type is the page items' own, as the FAQ beside it draws it, and the same as
+// the timetable's: the title is the app's h2, an item's name and its price are the
+// body size in semibold (a FAQ's question), and the description is the body size in
+// regular (a FAQ's answer). Only the unit and the footnote are smaller, at the
+// small size. Two sizes, two weights, no color of its own.
+//
 // Words an item may leave out (description, unit) have no margin of their own, so
 // an item without them is simply shorter. The subtitle and the footnote do have
 // space around them and are not drawn when empty. With the editing tools on, an
@@ -21,7 +27,6 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-block-end: 2rem;
   }
 
   .price-list-subtitle {
@@ -32,11 +37,13 @@
     }
   }
 
+  // The rhythm of the FAQ's list: the same space above and below each rule.
   .price-list-items {
+    display: grid;
+    row-gap: 1.25rem;
     list-style: none;
     margin: 0;
     padding: 0;
-    border-block-start: 1px solid #8882;
   }
 
   // The name keeps the room; the price takes what it needs, up to a little under
@@ -46,7 +53,7 @@
     grid-template-columns: 1fr fit-content(45%);
     column-gap: 1.5rem;
     align-items: baseline;
-    padding-block: 1rem;
+    padding-block-end: 1.25rem;
     border-block-end: 1px solid #8882;
   }
 
@@ -79,55 +86,41 @@
   }
 }
 
-/* House gotcha: main#app h2/h3/p typography (ID specificity) overrides the
-   class-level type treatment — the text rules must match that scope.
-   The quieter words take --text-secondary, not --text-muted: on a page item's
-   surface in the dark theme --text-muted is under 3:1, too faint for small text. */
+/* House gotcha: main#app h3/p typography (ID specificity) overrides the
+   class-level type treatment — the text rules must match that scope. The title
+   and the subtitle are left as the app draws an h2 and a p.
+   The quieter words take --text-secondary, as the app's own p does, not
+   --text-muted: on a page item's surface in the dark theme --text-muted is under
+   3:1, too faint for small text. */
 main#app .page-item--price-list {
-  .price-list-title {
-    margin: 0;
-  }
-
-  .price-list-subtitle {
-    margin: 0.5rem 0 0;
-    color: var(--text-secondary);
-    line-height: 1.5;
-  }
-
-  .price-list-name {
-    margin: 0;
-    font-size: var(--font-size-lg);
-    line-height: 1.35;
-  }
-
-  .price-list-desc {
-    margin: 0;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-
+  .price-list-name,
+  .price-list-desc,
   .price-list-cost {
     margin: 0;
-    line-height: 1.35;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
   }
 
+  .price-list-name,
   .price-list-price {
     color: var(--text-primary);
-    font-size: var(--font-size-lg);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
   }
 
-  .price-list-unit {
+  .price-list-desc,
+  .price-list-unit,
+  .price-list-footnote {
     color: var(--text-secondary);
-    font-size: 0.875rem;
-    line-height: 1.5;
+  }
+
+  .price-list-unit,
+  .price-list-footnote {
+    font-size: var(--font-size-sm);
   }
 
   .price-list-footnote {
     margin: 1.25rem 0 0;
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    line-height: 1.5;
+    line-height: var(--line-height-normal);
   }
 }

@@ -31,7 +31,11 @@
   }
 
   // variant: two-column Q&A grid
-  &.faq--two-column {
+  //
+  // The variant's class is the item's own (props.class), so it is on the element
+  // around this one, the item's <section>, not on this root. It was looked for
+  // here, beside .page-item--faq, where it never is, and the variant did nothing.
+  .faq--two-column > & {
     max-inline-size: 1024px;
 
     .faq-list {

@@ -51,7 +51,12 @@
   }
 
   // variant: magazine-style two-column body
-  &.article--two-column {
+  //
+  // The variant's class is the item's own (props.class), so it is on the element
+  // around this one, the item's <article>, not on this root. It was looked for
+  // here, beside .page-item--article, where it never is, and the variant did
+  // nothing.
+  .article--two-column > & {
     .article-header,
     .article-body {
       max-inline-size: 960px;

@@ -6,13 +6,17 @@
 // HOW IT IS ORGANIZED, the same as the timetable
 //
 // Three units, top to bottom: the heading, the list, the button. Space says which
-// words belong together, and it only ever grows as the units get larger:
+// words belong together, and it only ever grows as the units get larger. The steps
+// are the ones Material's own components keep (a list item 12 above and below its
+// words; a dialog 24 between its headline, its content and its actions; 8 between
+// things that are one thing), and none is larger than 24: what sets the units apart
+// is the rules and the title's size as much as the space.
 //
 //   inside a unit      none: a title's words, an item's lines, sit on their leading
-//   title to subtitle  --spacing-2   the subtitle is the title's, so it sits close
-//   an item            --spacing-4   above and below its words, a rule between items
-//   list to footnote   --spacing-3   the footnote is the list's, so it sits close
-//   unit to unit       --spacing-10  heading to list, and list to button
+//   title to subtitle  --spacing-2 (8)   the subtitle is the title's
+//   list to footnote   --spacing-2 (8)   the footnote is the list's
+//   an item            --spacing-3 (12)  above and below its words, a rule between
+//   unit to unit       --spacing-6 (24)  heading to list, and list to button
 //
 // The list is ruled above its first item and below its last, so it is one block.
 //
@@ -45,7 +49,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-block-end: var(--spacing-10);
+    margin-block-end: var(--spacing-6);
   }
 
   .price-list-subtitle {
@@ -68,7 +72,7 @@
     grid-template-columns: minmax(0, 1fr) 9rem;
     column-gap: var(--spacing-8);
     align-items: baseline;
-    padding-block: var(--spacing-4);
+    padding-block: var(--spacing-3);
     border-block-end: 1px solid #8882;
   }
 
@@ -94,7 +98,7 @@
   // The button is a standard design-system button; only spacing lives here.
   .price-list-cta {
     align-self: center;
-    margin-block-start: var(--spacing-10);
+    margin-block-start: var(--spacing-6);
     text-decoration: none;
   }
 
@@ -150,7 +154,7 @@ main#app .page-item--price-list {
   }
 
   .price-list-footnote {
-    margin: var(--spacing-3) 0 0;
+    margin: var(--spacing-2) 0 0;
     font-size: var(--font-size-sm);
     line-height: var(--line-height-normal);
   }

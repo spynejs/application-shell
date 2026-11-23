@@ -57,7 +57,8 @@
 /* House gotcha: main#app h2 typography (ID specificity) overrides a class-level
    margin — the title asked for 2rem under it and got the h2's 12px, so it sat on
    its own content. The space between a heading and what it heads is the same in
-   every page item that is a titled list: --spacing-10. */
+   every page item that is a titled list: --spacing-6 (24px), the space
+   Material's own components keep between a headline and its content. */
 main#app .page-item--post-list .post-list-title {
-  margin-block-end: var(--spacing-10);
+  margin-block-end: var(--spacing-6);
 }

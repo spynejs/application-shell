@@ -1,0 +1,31 @@
+<div class="page-item--icon-grid">
+  <header class="icon-grid-header">
+    <h2 class="icon-grid-title">{{title}}</h2>
+    <p class="icon-grid-subtitle">{{subtitle}}</p>
+  </header>
+  <ul class="icon-grid-items" role="list">
+    {{#items}}
+    <li class="icon-grid-item">
+      <svg
+        class="icon icon-grid-icon"
+        viewBox="0 -960 960 960"
+        aria-hidden="true"
+      >
+        <path d="{{attrIconPath}}" />
+      </svg>
+      <h3 class="icon-grid-name">{{name}}</h3>
+      <p class="icon-grid-text">{{text}}</p>
+    </li>
+    {{/items}}
+  </ul>
+  <a
+    class="icon-grid-cta btn btn-primary"
+    data-channel="ROUTE"
+    data-event-prevent-default="true"
+    data-page-id="{{attrPageId}}"
+    data-topic-id="{{attrTopicId}}"
+    data-end-route="true"
+    href="{{attrCtaHref}}"
+    >{{ctaText}}</a
+  >
+</div>

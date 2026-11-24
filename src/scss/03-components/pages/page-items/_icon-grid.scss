@@ -1,0 +1,131 @@
+// Icon grid: a titled group of three to six short things a business offers or
+// stands for, each an icon, a name and one line. No photographs, and no links
+// inside an item; one optional button under the grid.
+//
+// HOW IT IS ORGANIZED, the same as the timetable and the price list
+//
+// Three units, top to bottom: the heading, the grid, the button.
+//
+//   title to subtitle  --spacing-2 (8)   the subtitle is the title's
+//   icon to name       --spacing-3 (12)  the icon is the name's
+//   name to line       none: an item's words sit on their leading
+//   row to row         --spacing-6 (24)
+//   unit to unit       --spacing-6 (24)  heading to grid, and grid to button
+//   column to column   --spacing-8 (32)  as the price list's two columns
+//
+// COLUMNS are the card grid's: three, two under 900px, one under 600px. Exactly
+// four items take four columns, so a row is never three and one. Five draw as
+// three and two; six as three and three.
+//
+// An item is set from its start edge: icon, name, line, one under another. The
+// heading above is centered, as every page item's is.
+//
+// TYPE is the page items' own: the title is the app's h2, a name is the body size
+// in semibold, its line the body size in regular and the quieter color.
+//
+// The icon is 24px (elements/_icons.scss) in the brand color.
+//
+// The subtitle has space of its own and is not drawn when empty. With the editing
+// tools on, an empty one keeps its place: that is where an author fills it in.
+//
+// Surface (background / radius / elevation) comes from the .page-item container
+// contract; this partial only lays out the content.
+.page-item--icon-grid {
+  display: flex;
+  flex-direction: column;
+
+  .icon-grid-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-block-end: var(--spacing-6);
+  }
+
+  .icon-grid-subtitle {
+    max-inline-size: 560px;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .icon-grid-items {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-6) var(--spacing-8);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &:has(> li:nth-child(4):last-child) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .icon-grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-inline-size: 0;
+  }
+
+  .icon-grid-icon {
+    margin-block-end: var(--spacing-3);
+    color: var(--brand);
+  }
+
+  // The button is a standard design-system button; only spacing lives here.
+  .icon-grid-cta {
+    align-self: center;
+    margin-block-start: var(--spacing-6);
+    text-decoration: none;
+  }
+
+  @media (max-width: 900px) {
+    .icon-grid-items,
+    .icon-grid-items:has(> li:nth-child(4):last-child) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .icon-grid-items,
+    .icon-grid-items:has(> li:nth-child(4):last-child) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}
+
+/* House gotcha: main#app h2/h3/p typography (ID specificity) overrides the
+   class-level type treatment — the text and margin rules must match that scope. */
+main#app .page-item--icon-grid {
+  .icon-grid-title {
+    margin: 0;
+  }
+
+  .icon-grid-subtitle {
+    margin: var(--spacing-2) 0 0;
+  }
+
+  .icon-grid-item {
+    margin: 0;
+  }
+
+  .icon-grid-name,
+  .icon-grid-text {
+    margin: 0;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+  }
+
+  .icon-grid-name {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .icon-grid-text {
+    color: var(--text-secondary);
+  }
+}

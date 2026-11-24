@@ -12,6 +12,7 @@
 @use 'elements/tables' as tables;
 @use 'elements/links' as links;
 @use 'elements/lists' as lists;
+@use 'elements/icons' as icons;
 // Utilities
 @use 'utilities/spacing-utils' as spacing;
 @use 'utilities/flex-utils' as flex;
@@ -42,6 +43,7 @@
     @include tables.table-styles($prefix, $addPrefixToCssVars);
     @include links.link-styles($prefix, $addPrefixToCssVars);
     @include lists.list-styles($prefix, $addPrefixToCssVars);
+    @include icons.icon-styles($prefix);
 
     // Utilities (spacing, flex, grid)
     @include spacing.spacing-utilities($prefix, $addPrefixToCssVars);

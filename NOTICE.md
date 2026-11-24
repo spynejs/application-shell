@@ -1,7 +1,8 @@
-# Notice — photographs
+# Notice — photographs and icons
 
 The MIT license in [LICENSE](LICENSE) covers this project's source code. It does
-**not** cover the photographs in `src/static/imgs/`.
+**not** cover the photographs in `src/static/imgs/`, nor the icons' shapes
+([Icons](#icons), below).
 
 Files there whose names begin with `pexels-` are photographs from
 [Pexels](https://www.pexels.com). They are provided under the
@@ -50,3 +51,12 @@ Sample photographs shipped with this template:
 | `pexels-photo-2256041.jpeg` | not recorded | Pexels photo 2256041 (source page no longer available) |
 | `pexels-photo-3184418.jpeg` | fauxels | https://www.pexels.com/photo/photo-of-people-near-wooden-table-3184418/ |
 | `pexels-photo-3591557.jpeg` | Tomáš Malík | https://www.pexels.com/photo/close-up-photo-of-geological-formation-3591557/ |
+
+## Icons
+
+The shapes in `src/app/traits/utils/icon-shapes.js` are Google's
+[Material Symbols](https://fonts.google.com/icons), copyright Google LLC, under the
+[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0). Each is taken
+unchanged from the SVG of its name in
+[`google/material-design-icons`](https://github.com/google/material-design-icons) at
+commit `10ecc14`. The shapes are compiled into the application's script.

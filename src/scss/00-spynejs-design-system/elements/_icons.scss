@@ -1,0 +1,24 @@
+// An icon: an SVG with the class `icon`, one of the app's set
+// (traits/utils/icon-shapes.js). Its shape is placed beside its name in a page
+// item's data before the item renders (pageItemCore$PlaceIcons):
+//
+//   <svg class="icon" viewBox="0 -960 960 960" aria-hidden="true">
+//     <path d="{{attrIconPath}}" />
+//   </svg>
+//
+// 24px is the size the shapes are drawn for. An icon takes the text color of where
+// it is put: a component gives its icon a color by giving it `color`.
+//
+// An icon is decoration beside words that say the same thing, so it carries
+// aria-hidden="true". Where an icon stands alone, the button or link around it is
+// what is named (aria-label), not the icon.
+@mixin icon-styles($prefix: '') {
+  .#{$prefix}icon {
+    display: inline-block;
+    flex: none;
+    inline-size: 24px;
+    block-size: 24px;
+    fill: currentColor;
+    vertical-align: middle;
+  }
+}

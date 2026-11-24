@@ -48,7 +48,11 @@ $dark-theme: (
   text-primary: $color-neutral-100,
   text-secondary: $color-neutral-200,
   text-inverse: $color-neutral-950,
-  text-muted: $color-neutral-500,
+  // Two steps lighter than the light theme's: neutral-500 on this theme's surfaces
+  // is under 3:1 (2.83:1 on a page item), too faint for the small print it colors
+  // (a FAQ's answer, a post's date, a product's variant). neutral-300 is 5.9:1
+  // there, and still quieter than text-secondary.
+  text-muted: $color-neutral-300,
 
   // Status
   success: #0d9488,

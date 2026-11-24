@@ -9,8 +9,8 @@ import { PageItemCoreTraits } from '/src/app/traits/page/page-item-core-traits.j
 const placeIcons = (data) => PageItemCoreTraits.pageItemCore$PlaceIcons(data);
 
 describe('ICON_SHAPES', () => {
-  it('should hold the set of 72', () => {
-    expect(Object.keys(ICON_SHAPES)).to.have.lengthOf(72);
+  it('should hold the set of 73', () => {
+    expect(Object.keys(ICON_SHAPES)).to.have.lengthOf(73);
   });
 
   it('should give every name a shape that is path data and nothing else', () => {

@@ -27,8 +27,8 @@ npm start
 
 | Script | Description |
 | --- | --- |
-| `npm start` | Development server with hot reload |
-| `npm run build` | Production build into `dist/` |
+| `npm start` | Development server with hot reload; debug on, with the CMS and the console |
+| `npm run build` | Production build into `dist/`; debug off, no CMS and no console |
 | `npm test` | Unit tests via Web Test Runner |
 | `npm run lint` | ESLint |
 | `npm run lint:fix` | ESLint with autofix |

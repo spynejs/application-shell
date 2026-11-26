@@ -8,3 +8,4 @@ If `node_modules/@spynejs/grammar` is missing, run `npm install` first — the G
 
 - All page content lives in `src/static/data/app.model.json`; the route tree lives in `config.channels.ROUTE` in `src/index.js`. Adding a page is a data edit (see the Grammar's `author-app-model-node` card), not a new view class.
 - `npm start` — dev server; `npm test` — web-test-runner suite; `npm run build` — production build.
+- `debug` in `src/index.js` follows the build: on under `npm start`, off in `npm run build`, and the CMS and the console load the same way. The framework's warnings are written only while debug is on, so read them under `npm start`, not in a build.

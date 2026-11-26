@@ -19,7 +19,10 @@ import { AppContainer } from './app/app-container.js';
 import pageItemTemplateLookup from 'traits/utils/page-item-template-lookup.js';
 
 const config = {
-  debug: true,
+  // On while you develop (`npm start`), off in a build (`npm run build`).
+  // Debug mode checks every view and every channel payload as the app runs
+  // and names them in the console, which a visitor's browser should not do.
+  debug: process.env.NODE_ENV === 'development',
   storageConfig: {
     storageKey: 'spyneAppStorage',
     analyticsOptions: {},

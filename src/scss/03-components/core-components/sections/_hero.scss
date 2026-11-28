@@ -4,6 +4,12 @@
   background-color: var(--paper);
   padding: var(--space-xxxl, 4rem);
 
+  // On a phone that padding leaves the hero's words less than half the window,
+  // and a long word in the headline is broken in the middle of itself.
+  @media (max-width: 600px) {
+    padding-inline: var(--space-md, 1rem);
+  }
+
   .hero__layout {
     max-width: 1280px;
     margin: 0 auto;

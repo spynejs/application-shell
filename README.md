@@ -34,6 +34,8 @@ npm start
 | `npm run lint:fix` | ESLint with autofix |
 | `npm run format` | Prettier over `src/` |
 
+Under `npm start`, ctrl+alt+p turns the CMS and the console off for the browser tab, and the same keys turn them on again.
+
 ## Structure
 
 ```

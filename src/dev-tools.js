@@ -13,7 +13,7 @@ const cmsPluginConfig = {
 
 export const devToolsReady = new Promise((resolve) => {
   const spyneCmsPlugin = new SpyneCmsPlugin(cmsPluginConfig);
-  SpyneApp.registerPlugin(spyneCmsPlugin);
+  const cmsIsOn = SpyneApp.registerPlugin(spyneCmsPlugin);
 
   SpyneApp.registerPlugin(
     new SpynePluginConsole({
@@ -21,6 +21,13 @@ export const devToolsReady = new Promise((resolve) => {
       minimize: false,
     }),
   );
+
+  // The CMS was turned off by the plugins' toggle keys (ctrl+alt+p by default):
+  // nothing will answer, so do not wait for it.
+  if (cmsIsOn === false) {
+    resolve();
+    return;
+  }
 
   /**
    * Resolve once the CMS has settled: its registry lookup
